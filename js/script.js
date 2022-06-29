@@ -62,6 +62,8 @@ const btnPrev = document.getElementById('prev-btn');
 const stopPlayAuto = document.getElementById('stop-play-auto');
 const reverseAuto = document.getElementById('reverse-auto');
 let autoplayIsActive = false;
+let reverseIsActive = false;
+let autoplay;
 
 btnNext.addEventListener('click',function(){
     moveForward();
@@ -104,6 +106,7 @@ function moveBack(){
 stopPlayAuto.addEventListener('click',function(){
 
     if(autoplayIsActive == false){
+        clearInterval(autoplay);
         autoplayIsActive = true;
         autoplay = setInterval(moveForward,2000);
     }
@@ -113,4 +116,17 @@ stopPlayAuto.addEventListener('click',function(){
     }
 })
 
-invertAuto.addEventListener('click',function())
+reverseAuto.addEventListener('click',function(){
+    if(reverseIsActive == false){
+        autoplayIsActive = true;
+        reverseIsActive = true;
+        clearInterval(autoplay);
+        autoplay = setInterval(moveBack,2000);
+    }
+    else{
+        autoplayIsActive = true;
+        reverseIsActive = false;
+        clearInterval(autoplay);
+        autoplay = setInterval(moveForward,2000);
+    }
+})
