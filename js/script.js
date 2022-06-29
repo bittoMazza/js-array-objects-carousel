@@ -59,6 +59,9 @@ const listImage = containerImages.querySelectorAll('img');
 const listThumbnail = thumbnailContainer.querySelectorAll('img');
 const btnNext = document.getElementById('next-btn');
 const btnPrev = document.getElementById('prev-btn');
+const stopPlayAuto = document.getElementById('stop-play-auto');
+const reverseAuto = document.getElementById('reverse-auto');
+let autoplayIsActive = false;
 
 btnNext.addEventListener('click',function(){
     moveForward();
@@ -66,33 +69,48 @@ btnNext.addEventListener('click',function(){
 
 
 btnPrev.addEventListener('click',function(){
-    titleZone.innerHTML = images[activeIndex].title;
-    listImage[activeIndex].classList.remove('active');
-    listThumbnail[activeIndex].classList.remove('active');
-    activeIndex--;
-    // Quando andiamo sotto la posizione 0 torniamo alla lunghezza dell'array - 1
-    if(activeIndex < 0){
-       activeIndex = listImage.length - 1;
-    }
-    titleZone.innerHTML = images[activeIndex].title;
-    descriptionZone.innerHTML = images[activeIndex].description
-    listImage[activeIndex].classList.add('active');
-    listThumbnail[activeIndex].classList.add('active');
+    moveBack();
  }) 
 
 function moveForward(){
-    
     listImage[activeIndex].classList.remove('active');
     listThumbnail[activeIndex].classList.remove('active');
     activeIndex++;
-   // Quando raggiungiamo la lunghezza masssima dell'array torniamo alla posizione iniziale 
-   if(activeIndex === listImage.length){
-      activeIndex = 0;
-   }
+        // Quando raggiungiamo la lunghezza masssima dell'array torniamo alla posizione iniziale 
+        if(activeIndex === listImage.length){
+           activeIndex = 0;
+        }
    titleZone.innerHTML = images[activeIndex].title;
    descriptionZone.innerHTML = images[activeIndex].description
    listImage[activeIndex].classList.add('active');
    listThumbnail[activeIndex].classList.add('active');
 }
 
-setInterval(moveForward,3000)
+function moveBack(){
+    listImage[activeIndex].classList.remove('active');
+    listThumbnail[activeIndex].classList.remove('active');
+        activeIndex--;
+        // Quando andiamo sotto la posizione 0 torniamo alla lunghezza dell'array - 1
+        if(activeIndex < 0){
+            activeIndex = listImage.length - 1;
+        }
+        titleZone.innerHTML = images[activeIndex].title;
+        descriptionZone.innerHTML = images[activeIndex].description
+        listImage[activeIndex].classList.add('active');
+        listThumbnail[activeIndex].classList.add('active') 
+    }
+   
+
+stopPlayAuto.addEventListener('click',function(){
+
+    if(autoplayIsActive == false){
+        autoplayIsActive = true;
+        autoplay = setInterval(moveForward,2000);
+    }
+    else{
+        clearInterval(autoplay);
+        autoplayIsActive = false;
+    }
+})
+
+invertAuto.addEventListener('click',function())
