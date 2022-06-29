@@ -108,7 +108,12 @@ stopPlayAuto.addEventListener('click',function(){
     if(autoplayIsActive == false){
         clearInterval(autoplay);
         autoplayIsActive = true;
-        autoplay = setInterval(moveForward,2000);
+        if(reverseIsActive == false){
+            autoplay = setInterval(moveForward,2000);
+        }
+        else{
+            autoplay = setInterval(moveBack,2000);
+        }   
     }
     else{
         clearInterval(autoplay);
