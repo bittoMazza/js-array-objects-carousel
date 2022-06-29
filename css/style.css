@@ -50,3 +50,15 @@ body{
     top: 50%;
     border-radius: 50%;
 }
+
+.top-text{
+    top: 30px;
+    right: 30px;
+}
+
+.top-text-container{
+    text-align: right;
+    position: absolute;
+    top: 30px;
+    right: 30px;
+}

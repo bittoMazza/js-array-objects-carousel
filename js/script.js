@@ -33,19 +33,24 @@ let newImages;
 let newThumbImg;
 let thumbnailContainer = document.getElementById('thumbnail-container');
 let containerImages = document.getElementById('carousel-image-container');
+let titleZone = document.getElementById('title-zone');
+let descriptionZone = document.getElementById('description-zone');
+titleZone.innerHTML = images[activeIndex].title;
+descriptionZone.innerHTML = images[activeIndex].description;
+
 console.log(images.length)
 for(let i = 0;i < images.length; i++){
     newThumbImg = document.createElement("img");
-    newImages = document.createElement("img");
     newThumbImg.setAttribute('src',images[i].url)
-    newImages.setAttribute('src',images[i].url);
+    newImages = document.createElement('img');
+    newImages.setAttribute('src',images[i].url)
     // Al primo elemento diamo la classe active
     if(i == 0){
         newThumbImg.classList.add('active');
         newImages.classList.add('active');
     }
+    containerImages.append(newImages)
     thumbnailContainer.append(newThumbImg);
-    containerImages.append(newImages);
 }
 
 console.log(thumbnailContainer)
@@ -61,6 +66,7 @@ btnNext.addEventListener('click',function(){
 
 
 btnPrev.addEventListener('click',function(){
+    titleZone.innerHTML = images[activeIndex].title;
     listImage[activeIndex].classList.remove('active');
     listThumbnail[activeIndex].classList.remove('active');
     activeIndex--;
@@ -68,11 +74,14 @@ btnPrev.addEventListener('click',function(){
     if(activeIndex < 0){
        activeIndex = listImage.length - 1;
     }
+    titleZone.innerHTML = images[activeIndex].title;
+    descriptionZone.innerHTML = images[activeIndex].description
     listImage[activeIndex].classList.add('active');
     listThumbnail[activeIndex].classList.add('active');
  }) 
 
 function moveForward(){
+    
     listImage[activeIndex].classList.remove('active');
     listThumbnail[activeIndex].classList.remove('active');
     activeIndex++;
@@ -80,7 +89,10 @@ function moveForward(){
    if(activeIndex === listImage.length){
       activeIndex = 0;
    }
+   titleZone.innerHTML = images[activeIndex].title;
+   descriptionZone.innerHTML = images[activeIndex].description
    listImage[activeIndex].classList.add('active');
    listThumbnail[activeIndex].classList.add('active');
 }
+
 setInterval(moveForward,3000)
